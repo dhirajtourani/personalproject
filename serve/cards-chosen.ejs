@@ -1,0 +1,31 @@
+<div class="cards-chosen">
+    <div class="my-cards-power">
+    </div>
+    <div class="my-cards-number">
+    </div>
+    <div class="my-cards-list">
+        <ul>
+        </ul>
+    </div>
+</div>
+
+<script>
+    mycards._changed(function(){
+        var mycardslist = $('.cards-chosen > .my-cards-list > ul');
+        mycardslist.empty();
+        for (var cardkey in mycards){
+            var cardlistitem = $('<li class="card-list-item">');
+            mycardslist.append(cardlistitem);
+        }
+    });
+    mycards._changed(function(){
+        var mycardspower = findmycardspower();
+        var message = mycardspower + '/' + mycardspowerlimit + ' power';
+        $('.my-cards-power').text(message);
+    });
+    mycards._changed(function(){
+        var mycardsnumber = findmycardsnumber();
+        var message = mycardsnumber + '/' + mycardsnumberlimit;
+        $('.my-cards-number').text(message);
+    });
+</script>

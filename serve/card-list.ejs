@@ -1,0 +1,55 @@
+<%
+    var cardslist = cards;
+    
+    var rows = [1,2,3,4,5,6];
+    var columns = [1,2,3,4,5];
+    
+    for (var rowkey in rows){
+        %>
+    <div class="row full-width centered">
+        <%
+        
+        for (var columnkey in columns){
+            var card = cardslist.pop();
+            var cardkey = cards.indexOf(card);
+            %>
+    <div class="col-sm-2">
+        <div class="card" data-cardkey="<%= cardkey %>">
+            Type: <%= card.type %> <br>
+            Power: <%= card.power %>
+        </div>
+    </div>
+            <%
+        }
+        %>
+    </div>
+        <%
+    }
+    
+    for (var cardkey in cards){
+        var card = cards[cardkey];
+        
+    }
+%>
+
+<script>
+    $('.card').click(function(){
+        var cardkey = $(this).attr('data-cardkey');
+        tryaddcard(cardkey);
+    });
+</script>
+<script>
+    mycards._changing(function(event){
+        if (event.value === undefined){//removing card
+            $('.card').each(function(){
+                if ($(this).attr('data-cardkey') === event.key)
+                    $(this).show();
+            });}
+        else{//adding card
+            $('.card').each(function(){
+                if ($(this).attr('data-cardkey') === event.key)
+                    $(this).hide();
+            });
+        }
+    });
+</script>

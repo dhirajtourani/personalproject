@@ -1,0 +1,63 @@
+<%
+    var mycardsnumberlimit = 12;
+    var mycardspowerlimit = 70;
+    var cards = [];
+
+    var powers = [1,2,3,4,5,6,7,8,9,10];
+    var types = ['Fire', 'Water', 'Grass'];
+    
+    for (var powerkey in powers){
+        var power = powers[powerkey];
+        for (var typekey in types){
+            var type = types[typekey];
+            
+            var card = 
+            {
+                'power': power,
+                'type': type
+            };
+            
+            cards.push(card);
+            
+        }
+    }
+    
+    var mycards = littlecontexticater(cards, littlecontext);
+    
+    var findmycardsnumber = function(){
+        var totalnumber = 0;
+        for (var cardkey in mycards){
+            var card = mycards[cardkey];
+            if (card !== undefined)
+                totalnumber = totalnumber + 1;
+        }
+        return totalnumber;
+    };
+    
+    var findmycardspower = function(){
+        var totalpower = 0;
+        for (var cardkey in mycards){
+            var card = mycards[cardkey];
+            if (card !== undefined)
+                totalpower = totalpower + card.power;
+        }
+        return totalpower;
+    };
+    
+    var tryaddcard = function(cardkey){
+        var card = cards[cardkey];
+        if (mycards[cardkey] !== undefined)
+            return 'Failed';
+        if (findmycardspower() + card.power > mycardspowerlimit)
+            return 'Failed';
+        if (findmycardsnumber() + 1 > mycardsnumberlimit)
+            return 'Failed';
+        mycards.var(cardkey, card);
+        return 'Success :)';
+    };
+%>
+
+<div class="row full-height">
+    <%- include('pane', {width: 9, content: 'card-list'}) %>
+    <%- include('pane', {width: 3, content: 'cards-chosen'}) %>
+</div>
